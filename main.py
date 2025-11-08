@@ -19,6 +19,7 @@ def hit():
     score = game.player_hit()
     ui.show_game(game.dealer_hand, game.player_hand)
     ui.show_score(score)
+    ui.disable_bet_button()
     
     if score > 21: result()
 
@@ -27,14 +28,20 @@ def stand():
     ui.show_game(game.dealer_hand, game.player_hand)
     result()
 
+
+def double_bet():
+        game.player_money = game.player_money - 50
+        game.is_double_bet_called = True
+        ui.disable_bet_button()
+
 # Create the window
-hit_btn, stand_btn, new_btn = ui.create_window()
+hit_btn, stand_btn, new_btn, bet_btn = ui.create_window()
 
 # Connect buttons to functions
 hit_btn.config(command=hit)
 stand_btn.config(command=stand)
 new_btn.config(command=new_game)
+bet_btn.config(command=double_bet)
 
-# Start first game
 new_game()
 ui.run()

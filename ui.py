@@ -20,6 +20,8 @@ def create_window():
     global gallery_frame1
     global gallery_frame2
 
+    global bet_button
+
     root.title("Blackjack")
     root.geometry("820x650")
     root.configure(bg='green')
@@ -41,6 +43,7 @@ def create_window():
     hit_button = tk.Button(button_frame, text="Hit", width=10, font=('Arial', 12))
     stand_button = tk.Button(button_frame, text="Stand", width=10, font=('Arial', 12))
     new_button = tk.Button(button_frame, text="New game", width=10, font=('Arial', 12))
+    bet_button = tk.Button(button_frame, text="Double bet", width=10, font=('Arial', 12))
 
     # Packing
     dealer_label.pack(pady=20)
@@ -51,11 +54,12 @@ def create_window():
     money_label.pack()
     message_label.pack(pady=20)
     button_frame.pack(pady=20)
+    bet_button.pack(side='left', padx=5)
     hit_button.pack(side='left', padx=5)
     stand_button.pack(side='left', padx=5)
     new_button.pack(side='left', padx=5)
     
-    return hit_button, stand_button, new_button
+    return hit_button, stand_button, new_button, bet_button
 
 
 def hand_to_string(hand):
@@ -95,10 +99,14 @@ def show_message(text):
 def enable_buttons():
     hit_button['state'] = 'normal'
     stand_button['state'] = 'normal'
+    bet_button['state'] = 'normal'
 
 def disable_buttons():
     hit_button['state'] = 'disabled'
     stand_button['state'] = 'disabled'
+
+def disable_bet_button():
+    bet_button['state'] = 'disabled'
 
 def run():
     root.mainloop()

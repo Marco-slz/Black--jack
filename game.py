@@ -8,6 +8,8 @@ values = {
 }
 
 player_money = 500
+is_double_bet_called = False
+
 
 def create_deck():
     deck = []
@@ -70,11 +72,19 @@ def check_winner():
 
 def money_count(result):
     global player_money
-
+    global is_double_bet_called
+    
     if result == "You win!" or result == "Dealer BUST! You win!":
         player_money += 50
+        if is_double_bet_called == True:
+            player_money += 100
+            is_double_bet_called = False
     elif result == "Dealer wins!" or result == "BUST! You lose!":
         player_money -= 50
+    elif result == "TIE!":
+        if is_double_bet_called == True:
+            player_money += 50
+            is_double_bet_called = False
 
     return player_money
 
