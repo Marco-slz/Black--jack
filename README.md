@@ -12,6 +12,6 @@ How to Use:
  open the Black--jack-test folder
  and run the main.py file a small window shoudl open on your pc, and you can play from there.
 
- Enjoy from there
+ Enjoy from there on!
  
 
