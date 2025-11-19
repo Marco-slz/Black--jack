@@ -13,15 +13,19 @@ def create_window():
     global dealer_label
     global player_label
     global score_label
+    global money_label
     global message_label
     global hit_button
     global stand_button
     global gallery_frame1
     global gallery_frame2
 
+    global bet_button
+
     root.title("Blackjack")
     root.geometry("820x650")
     root.configure(bg='green')
+    root.iconbitmap("cards/ace_of_hearts.ico") # Set app icon
 
     # Frames
     gallery_frame1 = tk.Frame(root, bg='green')
@@ -32,12 +36,14 @@ def create_window():
     dealer_label = tk.Label(root, text="", bg='green', fg='white', font=('Arial', 14))
     player_label = tk.Label(root, text="", bg='green', fg='white', font=('Arial', 14))
     score_label = tk.Label(root, text="", bg='green', fg='white', font=('Arial', 12))
+    money_label = tk.Label(root, text="", bg='green', fg='white', font=('Arial', 12))
     message_label = tk.Label(root, text="", bg='green', fg='yellow', font=('Arial', 14, 'bold'))
     
     # Buttons
     hit_button = tk.Button(button_frame, text="Hit", width=10, font=('Arial', 12))
     stand_button = tk.Button(button_frame, text="Stand", width=10, font=('Arial', 12))
     new_button = tk.Button(button_frame, text="New game", width=10, font=('Arial', 12))
+    bet_button = tk.Button(button_frame, text="Double bet", width=10, font=('Arial', 12))
 
     # Packing
     dealer_label.pack(pady=20)
@@ -45,13 +51,16 @@ def create_window():
     player_label.pack(pady=20)
     gallery_frame2.pack(pady=20)
     score_label.pack()
+    money_label.pack()
     message_label.pack(pady=20)
     button_frame.pack(pady=20)
+    bet_button.pack(side='left', padx=5)
     hit_button.pack(side='left', padx=5)
     stand_button.pack(side='left', padx=5)
     new_button.pack(side='left', padx=5)
     
-    return hit_button, stand_button, new_button
+    return hit_button, stand_button, new_button, bet_button
+
 
 def hand_to_string(hand):
     result_string = ""
@@ -81,16 +90,23 @@ def show_game(dealer_hand, player_hand):
 def show_score(score):
     score_label.config(text=f"Your score: {score}")
 
+def show_money(money):
+    money_label.config(text=f"Your money: ${money}")
+
 def show_message(text):
     message_label.config(text=text)
 
 def enable_buttons():
     hit_button['state'] = 'normal'
     stand_button['state'] = 'normal'
+    bet_button['state'] = 'normal'
 
 def disable_buttons():
     hit_button['state'] = 'disabled'
     stand_button['state'] = 'disabled'
+
+def disable_bet_button():
+    bet_button['state'] = 'disabled'
 
 def run():
     root.mainloop()

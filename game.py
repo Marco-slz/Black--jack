@@ -7,7 +7,9 @@ values = {
     'Jack': 10, 'Queen': 10, 'King': 10, 'Ace': 11
 }
 
-player_money = 10000
+player_money = 500
+is_double_bet_called = False
+
 
 def create_deck():
     deck = []
@@ -67,3 +69,22 @@ def check_winner():
     else:
         print("Dealer wins by score")
         return "Dealer wins!"
+
+def money_count(result):
+    global player_money
+    global is_double_bet_called
+    
+    if result == "You win!" or result == "Dealer BUST! You win!":
+        player_money += 50
+        if is_double_bet_called == True:
+            player_money += 100
+            is_double_bet_called = False
+    elif result == "Dealer wins!" or result == "BUST! You lose!":
+        player_money -= 50
+    elif result == "TIE!":
+        if is_double_bet_called == True:
+            player_money += 50
+            is_double_bet_called = False
+
+    return player_money
+
